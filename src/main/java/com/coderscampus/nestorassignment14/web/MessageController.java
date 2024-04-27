@@ -40,4 +40,12 @@ public class MessageController {
 		List<Message> messages = channel.getMessages();
 		return messages;
 	}
+	
+	@GetMapping("/getAllMessages/{channelId}")
+	@ResponseBody
+	public List<Message> getAllMessagesForChannel(@PathVariable Long channelId) {
+	    Channel channel = channelService.findByChannelId(channelId);
+	    List<Message> messages = channel.getMessages();
+	    return messages;
+	}
 }

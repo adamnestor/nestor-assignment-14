@@ -77,25 +77,45 @@ function fetchNewMessages() {
 		});
 }
 function renderMessages(newMessages) {
-	chatBox.innerHTML = "";
+    chatBox.innerHTML = "";
 
-	newMessages.forEach((message) => {
-		let messageElement = document.createElement('p');
-		messageElement.textContent = `${message.sender.username} : ${message.messageBody}`;
-		chatBox.append(messageElement);
-	});
+    newMessages.forEach((message) => {
+        if (message.sender && message.sender.username && message.messageBody) {
+            let messageElement = document.createElement('p');
+            messageElement.textContent = `${message.sender.username} : ${message.messageBody}`;
+            chatBox.append(messageElement);
+        } else {
+            console.error("Invalid message format:", message);
+        }
+    });
 }
 
 setInterval(fetchNewMessages, 500);
 
 
-//LOADS ALL NEW MESSAGES WHEN NEW USER JOINS PAGE
 document.addEventListener("DOMContentLoaded", () => {
-	fetchNewMessages();
-	let messagesFromLocalStorage = JSON.parse(localStorage.getItem("messages")) || [];
+	fetchAllMessages();
+})
 
-	if (messagesFromLocalStorage.length > 0) {
-		renderMessages(messagesFromLocalStorage);
-	}
+function fetchAllMessages(){
+	fetch(`/getAllMessages/${channelId}`)
+	.then((response) => response.json())
+	.then((messages) => {
+		renderMessages(messages)
+		
+		localStorage.setItem("messages", JSON.stringify(messages))
+	})
+}
 
-});
+
+
+//LOADS ALL NEW MESSAGES WHEN NEW USER JOINS PAGE
+//document.addEventListener("DOMContentLoaded", () => {
+//	fetchNewMessages();
+//	let messagesFromLocalStorage = JSON.parse(localStorage.getItem("messages")) || [];
+//
+//	if (messagesFromLocalStorage.length > 0) {
+//		renderMessages(messagesFromLocalStorage);
+//	}
+//
+//});
