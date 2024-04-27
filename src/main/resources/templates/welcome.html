@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Welcome!</title>
+	<script src="/js/welcome.js" th:src="@{/js/welcome.js}"></script>
+</head>
+
+<body>
+	<h2>Join A Channel</h2>
+	<form id="welcomeForm" action"/join" method="post">
+		<input type="hidden" id="username" name="username">
+		<label for="channel">Choose a channel:</label>
+		<select id="channel" name="channelId" required>
+			<option value="1">General</option>
+			<option value="2">Coding</option>
+			<option value="3">Sports</option>
+		</select>
+		<br>
+		<button type="submit">Join Channel</button>
+	</form>
+</body>
+
+</html>
