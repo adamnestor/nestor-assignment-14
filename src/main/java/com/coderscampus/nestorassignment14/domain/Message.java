@@ -1,38 +1,45 @@
 package com.coderscampus.nestorassignment14.domain;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class Message {
 
-	private static int idCounter = 0;
-	private int id;
-	private int userId;
+	private Long messageId;
+	private User sender;
+	private Long channelId;
 	private String content;
-	private LocalDateTime timestamp;
 
-	public Message(int id, int userId, String content) {
-		this.id = generateUniqueId();
-		this.userId = userId;
+	public Message(Long messageId, User sender, Long channelId, String content, Instant timestamp) {
+		this.messageId = messageId;
+		this.sender = sender;
+		this.channelId = channelId;
 		this.content = content;
-		this.timestamp = LocalDateTime.now();
 	}
 
 	// Getters and Setters
 
-	public int getId() {
-		return id;
+	public Long getMessageId() {
+		return messageId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setMessageId(Long messageId) {
+		this.messageId = messageId;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getSender() {
+		return sender;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+
+	public Long getChannelId() {
+		return channelId;
+	}
+
+	public void setChannelId(Long channelId) {
+		this.channelId = channelId;
 	}
 
 	public String getContent() {
@@ -43,17 +50,4 @@ public class Message {
 		this.content = content;
 	}
 
-	public LocalDateTime getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(LocalDateTime timestamp) {
-		this.timestamp = timestamp;
-	}
-
-	//Methods
-	
-	private synchronized int generateUniqueId() {
-		return ++idCounter;
-	}
 }
