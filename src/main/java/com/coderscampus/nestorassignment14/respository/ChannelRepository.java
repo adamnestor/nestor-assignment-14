@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import com.coderscampus.nestorassignment14.domain.Channel;
 
-@Repository
+@Component
 public class ChannelRepository {
 
 	private List<Channel> channels = new ArrayList<>();

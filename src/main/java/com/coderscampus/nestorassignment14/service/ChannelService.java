@@ -14,7 +14,7 @@ public class ChannelService {
 	@Autowired
 	private ChannelRepository channelRepo;
 
-	public Channel fundChannelById(Long channelId) {
+	public Channel findChannelById(Long channelId) {
 		return channelRepo.findById(channelId).orElse(new Channel());
 	}
 

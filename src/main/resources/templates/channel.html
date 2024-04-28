@@ -6,8 +6,9 @@
 </head>
 
 <body>
-	<div class="message-display">
+	<div class="message-display" style="border: 1px solid black;">
 		<div th:each="message : ${messages}" th:inline="text">
+			<span class="sender">[[${message.user.username}]]: </span>
 			<span class="message">[[${message.text}]]</span>
 		</div>
 	</div>

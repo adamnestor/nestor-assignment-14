@@ -3,11 +3,11 @@ package com.coderscampus.nestorassignment14.respository;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import com.coderscampus.nestorassignment14.domain.User;
 
-@Repository
+@Component
 public class UserRepository {
 	
 	private Set<User> users = new TreeSet<>();

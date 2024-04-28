@@ -1,9 +1,10 @@
-const textBox = document.querySelector("#textBox")
+var textBox = document.querySelector("#textBox")
 
 setInterval(getMessages, 500)
 
-textBox.addEventListener('keyup', (e) => {
-	if (e.keyCode === 13) {
+textBox.addEventListener('keydown', (e) => {
+	if (e.key === "Enter") {
+		console.log("Enter was pressed!!!")
 		let message = {
 			"text": textBox.value,
 			"channelId": channelId,
@@ -15,13 +16,14 @@ textBox.addEventListener('keyup', (e) => {
 		fetch('/messages', {
 			method: 'POST',
 			headers: {
-				'COntent-Type': 'applcation/json'
+				'Content-Type': 'application/json; charset=utf-8'
 			},
 			body: JSON.stringify(message)
 		}).then(response => { getMessages() })
 		return false
 	}
 })
+
 
 
 function getMessages() {
@@ -32,7 +34,7 @@ function getMessages() {
 			messageDisplay.innerHTML = ''
 			messages.forEach(message => {
 				messageDisplay.innerHTML += `<div>
-			  <span class="sender">${message.user.name}: </span>
+			  <span class="sender">${message.user.username}: </span>
 		  	  <span class="message">${message.text}</span>
 			</div>`
 			})
