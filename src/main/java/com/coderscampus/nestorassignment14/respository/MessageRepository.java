@@ -1,29 +1,25 @@
 package com.coderscampus.nestorassignment14.respository;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.coderscampus.nestorassignment14.domain.Channel;
 import com.coderscampus.nestorassignment14.domain.Message;
 
 @Repository
 public class MessageRepository {
 
-	private List<Message> messages = new ArrayList<>();
+	private Map<Long, List<Message>> messages = new HashMap<>();
 	
-	public Message save(Message message) {
-		message.setMessageId(generateMessageId());
-		messages.add(message);
-		return message;
+	public Optional<List<Message>> findMessagesByChannel (Long channelId){
+		List<Message> messagesByChannel = messages.get(channelId);
+		return Optional.ofNullable(messagesByChannel);
 	}
 	
-	public List<Message> findMessagesByChannelId(Channel channelId){
-		return messages;
-	}
-	
-	public synchronized Long generateMessageId() {
-		return messages.size() + 1L;
+	public void saveMessagesByChannel(Long channelId, List<Message> messagesByChannel) {
+		messages.put(channelId, messagesByChannel);
 	}
 }

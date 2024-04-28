@@ -1,22 +1,9 @@
 package com.coderscampus.nestorassignment14.domain;
 
-import java.util.List;
-
 public class Channel {
-
-	private Long channelId;
-	private List<User> users;
-	private List<Message> messages;
-
-	public Channel(Long channelId, List<User> users, List<Message> messages) {
-		this.channelId = channelId;
-		this.users = users;
-		this.messages = messages;
-	}
 	
-	public Channel() {}
-
-	// Getters and Setters
+	private Long channelId;
+	private String name;
 
 	public Long getChannelId() {
 		return channelId;
@@ -26,22 +13,11 @@ public class Channel {
 		this.channelId = channelId;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setName(String channelName) {
+		this.name = channelName;
 	}
-
-	public List<Message> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
-	}
-
-
-	
 }

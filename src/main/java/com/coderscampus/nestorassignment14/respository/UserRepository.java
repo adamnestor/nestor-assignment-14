@@ -1,7 +1,7 @@
 package com.coderscampus.nestorassignment14.respository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,19 +10,17 @@ import com.coderscampus.nestorassignment14.domain.User;
 @Repository
 public class UserRepository {
 	
-	private List<User> users = new ArrayList<>();
+	private Set<User> users = new TreeSet<>();
 	
-	public User save(User user) {
-		user.setUserId(generateUniqueId());
+	public User save (User user) {
+		if (users.size() == 0) {
+			user.setUserId(1L);
+		} else {
+			User lastUser = ((TreeSet<User>)users).last();
+			user.setUserId(lastUser.getUserId() + 1L);
+		}
 		users.add(user);
 		return user;
 	}
 	
-	public synchronized Long generateUniqueId() {
-		return users.size() + 1L;
-	}
-	
-	public User findByUsername(String username) {
-		return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().orElse(null);
-	}
 }

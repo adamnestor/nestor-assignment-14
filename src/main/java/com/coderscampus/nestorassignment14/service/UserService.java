@@ -11,16 +11,10 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepo;
-	
-	public User saveUser(User user) {
+
+	public User createUser(String username) {
+		User user = new User();
+		user.setUsername(username);
 		return userRepo.save(user);
-	}
-	
-	public Long assignUserId() {
-		return userRepo.generateUniqueId();
-	}
-	
-	public User findByUsername(String username) {
-		return userRepo.findByUsername(username);
 	}
 }

@@ -2,18 +2,9 @@ package com.coderscampus.nestorassignment14.domain;
 
 public class User {
 
-	private static Long idCounter = 1L;
 	private Long userId;
 	private String username;
-
-
-	// Constructor
-	public User(String name) {
-		this.userId = generateUniqueId();
-		this.username = name;
-	}
 	
-	public User() {}
 
 	// Getters and Setters
 	public Long getUserId() {
@@ -32,11 +23,4 @@ public class User {
 		this.username = username;
 	}
 
-
-	// Methods
-
-	
-	private static synchronized Long generateUniqueId() {
-		return ++idCounter;
-	}
 }

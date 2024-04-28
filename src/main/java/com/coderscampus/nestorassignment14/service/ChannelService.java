@@ -13,16 +13,12 @@ public class ChannelService {
 
 	@Autowired
 	private ChannelRepository channelRepo;
-	
-	public Channel saveChannel(Channel channel) {
-		return channelRepo.save(channel);
+
+	public Channel fundChannelById(Long channelId) {
+		return channelRepo.findById(channelId).orElse(new Channel());
 	}
-	
-	public Channel findByChannelId(Long channelId) {
-		return channelRepo.findByChannelId(channelId);
-	}
-	
-	public List<Channel> findAll(){
+
+	public List<Channel> findAll() {
 		return channelRepo.findAll();
 	}
 }

@@ -3,15 +3,33 @@
 
 <head>
 	<title>Welcome!</title>
+	<script type=""text/javascript>
+		let user = sessionStorage.getItem("user")
+		
+		if (user == null){
+			let name = prompt("What's your name?", "Guest")
+			while (name === '' || name == null){
+				name = prompt("What's your name?", "Guest")
+			}
+			fetch('/users', {
+				method: 'POST',
+				body: name
+			}).then(response => response.json())
+			.then(user => {
+				sessionStorage.setItem('user', JSON.stringify(user));
+			})
+		} else {
+			user.JSON.parse(sessionStorage.getItem("user"))
+			console.log(user)
+		}
+	</script>
 </head>
 
 <body>
 	<h3>Join A Channel</h3>
-	<div>
-		<a href="#" onclick="joinOrCreateGeneralChannel()">General Channel</a><br>
-		<a href="#" onclick="joinOrCreateChannel2()">Channel 2</a>
+	<div th:each="channel : ${channels}">
+		<a th:href="@{/channels/{channelId}(channelId=${channel.channelId})}" th:text="${channel.name}"></a>
 	</div>
-	<script type="text/javascript" src="/js/welcome.js"></script>
 </body>
 
 </html>

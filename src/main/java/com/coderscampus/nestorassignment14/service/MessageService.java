@@ -1,6 +1,8 @@
 package com.coderscampus.nestorassignment14.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,17 +21,15 @@ public class MessageService {
 	@Autowired
 	private ChannelRepository channelRepo;
 	
-	public Message saveMessage(Message message) {
-		return messageRepo.save(message);
+	public List<Message> getMessagesByChannel (Long channelId){
+		return messageRepo.findMessagesByChannel(channelId).orElse(new ArrayList<>());
 	}
 	
-	public List<Message> findMessagesByChannel(Long channelId){
-		Channel channel = channelRepo.findByChannelId(channelId);
-		return channel.getMessages();
-		
-	}
-	
-	public Long assignMessageId() {
-		return messageRepo.generateMessageId();
+	public void addMessageToChannel(Message message) {
+		Optional<Channel> channelOpt = channelRepo.findById(message.getChannelId());
+		if (channelOpt.isPresent()) {
+			List<Message> messagesByChannel = getMessagesByChannel(message.getChannelId());
+			messageRepo.saveMessagesByChannel(message.getChannelId(), messagesByChannel);
+		}
 	}
 }
