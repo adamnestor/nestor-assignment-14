@@ -18,7 +18,6 @@ public class ChannelController {
 
 	@Autowired
 	private ChannelService channelService;
-
 	@Autowired
 	private MessageService messageService;
 
@@ -28,12 +27,11 @@ public class ChannelController {
 	}
 
 	@GetMapping("/channels/{channelId}")
-	public String getChannel(ModelMap model, @PathVariable Long channelId) {
-		Channel channel = channelService.findChannelById(channelId);
-		List<Message> messagesByChannel = messageService.getMessagesByChannel(channelId);
+	public String getChannel(@PathVariable Long channelId, ModelMap model) {
+		Channel channel = channelService.findById(channelId);
+		List<Message> messages = messageService.getMessages(channelId);
 		model.put("channel", channel);
-		model.put("messages", messagesByChannel);
-
+		model.put("messages", messages);
 		return "channel";
 	}
 

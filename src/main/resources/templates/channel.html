@@ -2,21 +2,22 @@
 <html xmlns:th="http://thymeleaf.org">
 
 <head>
-	<title>Channel</title>
+	<title th:text="${channel.name}"></title>
+	<script type="text/javascript">
+		if (!sessionStorage.getItem('user')){
+			window.location.replace('/welcome')
+		}
+	</script>	
 </head>
 
 <body>
-	<div class="message-display" style="border: 1px solid black;">
-		<div th:each="message : ${messages}" th:inline="text">
-			<span class="sender">[[${message.user.username}]]: </span>
-			<span class="message">[[${message.text}]]</span>
-		</div>
-	</div>
-	<div class="message-text">
-		<textarea rows="5" cols="30" id="textBox"></textarea>
-	</div>
-
-	<script type="text/javascript" src="/js/channel.js"></script>
+	<h3 th:text="${channel.name}"></h3>
+	<div id="messagesDisplay" style="border: 1px solid black;"></div><br>
+	<textarea id="textBox" th:attr="data-id=${channel.channelId}" placeholder="Type your message..."></textarea>
+	<div>
+        <a href="/welcome">Back</a><br>
+    </div>
+    <script type="text/javascript" src="/js/channel.js"></script>
 </body>
 
 </html>

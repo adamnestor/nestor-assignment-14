@@ -8,18 +8,18 @@
 		
 		if (user == null){
 			let name = prompt("What's your name?", "Guest")
-			while (name === '' || name == null){
+			if (name === '' || name == null){
 				name = prompt("What's your name?", "Guest")
 			}
-			fetch('/users', {
+			fetch('/welcome', {
 				method: 'POST',
-				body: name
+				body: name,
 			}).then(response => response.json())
 			.then(user => {
 				sessionStorage.setItem('user', JSON.stringify(user));
 			})
 		} else {
-			user.JSON.parse(sessionStorage.getItem("user"))
+			user = JSON.parse(sessionStorage.getItem("user"))
 			console.log(user)
 		}
 	</script>
