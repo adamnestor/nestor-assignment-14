@@ -8,13 +8,13 @@ import com.coderscampus.nestorassignment14.domain.User;
 
 @Component
 public class UserRepository {
-	
+
 	List<User> users = new ArrayList<>();
-	
-	public User save (User user) {
+
+	public User save(User user) {
 		user.setUserId((long) (users.size() + 1));
 		users.add(user);
 		return user;
 	}
-	
+
 }
