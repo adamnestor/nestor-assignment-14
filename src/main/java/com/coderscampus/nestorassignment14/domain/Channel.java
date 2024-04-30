@@ -1,7 +1,7 @@
 package com.coderscampus.nestorassignment14.domain;
 
 public class Channel {
-	
+
 	private Long channelId;
 	private String name;
 
@@ -56,6 +56,5 @@ public class Channel {
 			return false;
 		return true;
 	}
-	
-	
+
 }
