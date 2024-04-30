@@ -25,8 +25,8 @@ public class MessageService {
 	public void saveMessage(Message message) {
 		Long channelId = message.getChannelId();
 		Channel channel = channelRepo.findById(channelId);
-        if (channel != null) {
-            messageRepo.saveMessage(channelId, message);
-        }
+		if (channel != null) {
+			messageRepo.saveMessage(channelId, message);
+		}
 	}
 }
