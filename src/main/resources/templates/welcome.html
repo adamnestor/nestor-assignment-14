@@ -3,21 +3,21 @@
 
 <head>
 	<title>Welcome!</title>
-	<script type="" text/javascript>
+	<script>
 		let user = sessionStorage.getItem("user")
-		
-		if (user == null){
+
+		if (user == null) {
 			let name = prompt("What's your name?", "Guest")
-			if (name === '' || name == null){
+			if (name === '' || name == null) {
 				name = prompt("What's your name?", "Guest")
 			}
 			fetch('/welcome', {
 				method: 'POST',
 				body: name,
 			}).then(response => response.json())
-			.then(user => {
-				sessionStorage.setItem('user', JSON.stringify(user));
-			})
+				.then(user => {
+					sessionStorage.setItem('user', JSON.stringify(user));
+				})
 		} else {
 			user = JSON.parse(sessionStorage.getItem("user"))
 			console.log(user)
