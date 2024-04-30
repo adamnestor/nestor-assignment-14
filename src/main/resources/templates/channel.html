@@ -4,10 +4,10 @@
 <head>
 	<title th:text="${channel.name}"></title>
 	<script type="text/javascript">
-		if (!sessionStorage.getItem('user')){
+		if (!sessionStorage.getItem('user')) {
 			window.location.replace('/welcome')
 		}
-	</script>	
+	</script>
 </head>
 
 <body>
@@ -15,9 +15,9 @@
 	<div id="messagesDisplay" style="border: 1px solid black;"></div><br>
 	<textarea id="textBox" th:attr="data-id=${channel.channelId}" placeholder="Type your message..."></textarea>
 	<div>
-        <a href="/welcome">Back</a><br>
-    </div>
-    <script type="text/javascript" src="/js/channel.js"></script>
+		<a href="/welcome">Back</a><br>
+	</div>
+	<script type="text/javascript" src="/js/channel.js"></script>
 </body>
 
 </html>
