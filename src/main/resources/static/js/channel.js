@@ -3,7 +3,7 @@ var user = JSON.parse(sessionStorage.getItem('user'))
 var channelId = textBox.getAttribute('data-id')
 
 
-function sendMessage(){
+function sendMessage() {
 	var message = {
 		'channelId': channelId,
 		'messageText': textBox.value,
@@ -17,14 +17,14 @@ function sendMessage(){
 		},
 		body: JSON.stringify(message)
 	})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data)
-	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data)
+		})
 }
 
-textBox.addEventListener('keydown', function(e){
-	if (e.key === 'Enter'){
+textBox.addEventListener('keydown', function(e) {
+	if (e.key === 'Enter') {
 		e.preventDefault()
 		sendMessage();
 	}
@@ -32,16 +32,16 @@ textBox.addEventListener('keydown', function(e){
 
 setInterval(getMessages, 500)
 
-function getMessages(){
+function getMessages() {
 	var messagesDisplay = document.querySelector('#messagesDisplay')
 	fetch(`/messages/${channelId}`)
-	.then(response => response.json())
-	.then(data => {
-		messagesDisplay.innerHTML = ''
-		data.forEach(message => {
-			messagesDisplay.innerHTML += `<div>
+		.then(response => response.json())
+		.then(data => {
+			messagesDisplay.innerHTML = ''
+			data.forEach(message => {
+				messagesDisplay.innerHTML += `<div>
 			  <span><b>${message.user.username}</b>: ${message.messageText}</span>
 			</div>`
+			})
 		})
-	})
 }
