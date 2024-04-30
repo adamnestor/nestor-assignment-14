@@ -17,17 +17,17 @@ public class MessageController {
 
 	@Autowired
 	private MessageService messageService;
-	
+
 	@GetMapping("/messages/{channelId}")
-	public List<Message> getMessages(@PathVariable Long channelId){
+	public List<Message> getMessages(@PathVariable Long channelId) {
 		List<Message> messages = messageService.getMessages(channelId);
 		return messages;
 	}
-	
+
 	@PostMapping("/message")
 	public Message postMessage(@RequestBody Message message) {
 		messageService.saveMessage(message);
 		return message;
 	}
-	
+
 }
